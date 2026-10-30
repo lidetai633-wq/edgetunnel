@@ -9,11 +9,11 @@ jobs:
       - name: Deploy worker
         env:
           CLOUDFLARE_API_TOKEN: ${{ secrets.CF_API_TOKEN }}
-          CLOUDFLARE_ACCOUNT_ID: de8febb2aed5a82a3d58705af2a7a2a8
+          CLOUDFLARE_ACCOUNT_ID: cd009af17cf9a727350b7d0bc42f72e6
         run: npx -y wrangler@latest deploy
       - name: Set ADMIN secret
         env:
           CLOUDFLARE_API_TOKEN: ${{ secrets.CF_API_TOKEN }}
-          CLOUDFLARE_ACCOUNT_ID: de8febb2aed5a82a3d58705af2a7a2a8
+          CLOUDFLARE_ACCOUNT_ID: cd009af17cf9a727350b7d0bc42f72e6
           ADMIN_PW: ${{ secrets.ADMIN_PW }}
         run: printf '%s' "$ADMIN_PW" | npx -y wrangler@latest secret put ADMIN
