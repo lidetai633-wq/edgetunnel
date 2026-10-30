@@ -1,0 +1,19 @@
+name: deploy
+on:
+  workflow_dispatch:
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Deploy worker
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CF_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: de8febb2aed5a82a3d58705af2a7a2a8
+        run: npx -y wrangler@latest deploy
+      - name: Set ADMIN secret
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CF_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: de8febb2aed5a82a3d58705af2a7a2a8
+          ADMIN_PW: ${{ secrets.ADMIN_PW }}
+        run: printf '%s' "$ADMIN_PW" | npx -y wrangler@latest secret put ADMIN
