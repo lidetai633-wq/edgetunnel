@@ -1,7 +1,7 @@
 {
   "$schema": "node_modules/wrangler/config-schema.json",
   "name": "edgetunnel",
-  "main": "worker-entry.js",
+  "main": "mini.js",
   "compatibility_date": "2025-11-04",
   "workers_dev": true,
   "preview_urls": true,
