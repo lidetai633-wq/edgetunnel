@@ -1,18 +1,6 @@
 {
-  "$schema": "node_modules/wrangler/config-schema.json",
   "name": "edgetunnel",
   "main": "mini.js",
   "compatibility_date": "2025-11-04",
-  "workers_dev": true,
-  "preview_urls": true,
-  "observability": { "enabled": true },
-  "routes": [
-    { "pattern": "edge.j13069.ccwu.cc", "custom_domain": true }
-  ],
-  "kv_namespaces": [
-    { "binding": "KV", "id": "c191fe0aa3184b8eb377b63523509ad1" }
-  ],
-  "vars": {
-    "PROXYIP": "179.255.185.126,162.243.115.21,185.65.151.81,179.255.185.119"
-  }
+  "workers_dev": true
 }
