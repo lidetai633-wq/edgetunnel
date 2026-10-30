@@ -1,0 +1,22 @@
+name: tail
+on: workflow_dispatch
+jobs:
+  tail:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - name: Tail and trigger
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CF_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: de8febb2aed5a82a3d58705af2a7a2a8
+        run: |
+          (npx -y wrangler@latest tail edgetunnel --format json > tail.log 2>&1 &)
+          sleep 25
+          for i in 1 2 3; do curl -s -o /dev/null -w "root %{http_code}\n" https://edgetunnel.a13058332.workers.dev/ ; done
+          for i in 1 2 3; do curl -s -o /dev/null -w "login %{http_code}\n" https://edgetunnel.a13058332.workers.dev/login ; done
+          sleep 15
+          pkill -f "wrangler tail" || true
+          sleep 2
+          echo "===== TAIL LOG ====="
+          cat tail.log
